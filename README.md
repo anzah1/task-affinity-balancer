@@ -36,8 +36,7 @@ There's no install as such. Script can be used as is without install.
 - [ ] Make script faster by skipping finding most idle core if thread or process
 doesn't use much CPU (it makes the script more complicated though). 
 
-- [ ] Make the output nicer and move most of the current output under debug command
-  line parameter.
+- [x] Make the output nicer
 
 - [ ] Handle case where multiple processes match in sane way. Now script picks the
   oldest process.

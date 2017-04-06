@@ -50,6 +50,7 @@ do
     echo Analyzing CPU utilization...
     CORE=$(populate_cpu_usage|sort -n -k 2|tail -1|cut -f 1)
   #fi
-  taskset -c -p $CORE $TASK
+  echo Locking PID $TASK to core $CORE
+  taskset -c -p $CORE $TASK > /dev/null
   sleep 1
 done
