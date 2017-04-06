@@ -26,6 +26,12 @@ There's no install as such. Script can be used as is without install.
   as parameter (script will use pgrep to find the PID), like this:
   `./affinity-lock.sh ThreadedBinary`
 
+## known issues
+
+* sometimes threads/processes get assigned a core that will later on get thread
+  or process that consumes lot of resources, workaround is to run the script
+  again
+
 ## TODO
 - [ ] Make script faster by skipping finding most idle core if thread or process
 doesn't use much CPU (it makes the script more complicated though). 
@@ -35,4 +41,8 @@ doesn't use much CPU (it makes the script more complicated though).
 
 - [ ] Handle case where multiple processes match in sane way. Now script picks the
   oldest process.
+
+- [ ] balance heavies CPU users first (right now there's risk that most idle
+  core will get several threads and then thread that uses lot of CPU gets
+  balanced to same core).
 
