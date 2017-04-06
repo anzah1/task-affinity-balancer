@@ -41,7 +41,7 @@ doesn't use much CPU (it makes the script more complicated though).
 - [ ] Handle case where multiple processes match in sane way. Now script picks the
   oldest process.
 
-- [ ] balance heavies CPU users first (right now there's risk that most idle
+- [x] balance heavies CPU users first (right now there's risk that most idle
   core will get several threads and then thread that uses lot of CPU gets
   balanced to same core).
 

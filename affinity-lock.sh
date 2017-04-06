@@ -17,6 +17,12 @@ function cpu_last() {
   echo $(grep '^processor' /proc/cpuinfo|tail -n 1|grep -o '[0-9]')
 }
 
+# This actually sorts PID:s by CPU time spent in user mode, which should be
+# close enough to actual CPU usage for our purposes
+function sort_by_cpu_usage() {
+  echo $(cut -d " " -f 1,14 /proc/$1/task/*/stat|sort -r -n -k 2|cut -d " " -f 1)
+}
+
 function populate_cpu_usage() {
   LAST=$(cpu_last)
   for i in $(seq 0 $LAST)
@@ -39,7 +45,7 @@ then
   exit 1
 fi
 
-TASK_LIST=($(ls /proc/$ROOT_PID/task))
+TASK_LIST=($(sort_by_cpu_usage $ROOT_PID))
 for TASK in ${TASK_LIST[*]}
 do
   echo Analyzing CPU utilization...
