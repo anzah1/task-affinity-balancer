@@ -42,14 +42,8 @@ fi
 TASK_LIST=($(ls /proc/$ROOT_PID/task))
 for TASK in ${TASK_LIST[*]}
 do
-  #CPU_USAGE=$(cut -d " " -f 14 /proc/$ROOT_PID/task/$TASK/stat)
-  #echo $CPU_USAGE
-  #if [[ $CPU_USAGE -gt 1000 ]]
-  #then
-  #  # this thread might make a dent in CPU usage, update the least busy core
-    echo Analyzing CPU utilization...
-    CORE=$(populate_cpu_usage|sort -n -k 2|tail -1|cut -f 1)
-  #fi
+  echo Analyzing CPU utilization...
+  CORE=$(populate_cpu_usage|sort -n -k 2|tail -1|cut -f 1)
   echo Locking PID $TASK to core $CORE
   taskset -c -p $CORE $TASK > /dev/null
   sleep 1
